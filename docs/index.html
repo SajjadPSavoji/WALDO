@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WALDO | WALDO: Where Unseen Model-based 6D Pose Estimation Meets Occlusion</title>
+<meta name="description" content="Model-based 6D pose estimation of unseen objects under occlusion">
+<meta property="og:title" content="WALDO: Where Unseen Model-based 6D Pose Estimation Meets Occlusion">
+<meta property="og:description" content="Model-based 6D pose estimation of unseen objects under occlusion">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sajjadpsavoji.github.io/WALDO/">
+<meta name="twitter:card" content="summary_large_image">
+<!-- TODO: add docs/static/teaser.png (1200x630) for social previews, then uncomment:
+<meta property="og:image" content="https://sajjadpsavoji.github.io/WALDO/static/teaser.png"> -->
+<meta name="citation_title" content="WALDO: Where Unseen Model-based 6D Pose Estimation Meets Occlusion">
+<meta name="citation_author" content="Sajjad Pakdamansavoji">
+<meta name="citation_author" content="Yintao Ma">
+<meta name="citation_author" content="Amir Rasouli">
+<meta name="citation_author" content="Tongtong Cao">
+<meta name="citation_arxiv_id" content="2511.15874">
+<style>
+:root{
+  --bg:#ffffff; --fg:#1a1a1a; --muted:#6b7280; --rule:#e5e7eb;
+  --accent:#1d4ed8; --chip:#f3f4f6; --chipfg:#374151; --code:#f6f8fa;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#0f1115; --fg:#e8eaed; --muted:#9aa3af; --rule:#242832;
+  --accent:#7aa2f7; --chip:#1a1e27; --chipfg:#c3c9d4; --code:#161a22;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+header{padding:72px 0 40px;text-align:center;border-bottom:1px solid var(--rule)}
+.venue{display:inline-block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin-bottom:18px}
+h1{font-size:clamp(28px,4.4vw,42px);line-height:1.18;margin:0 0 10px;letter-spacing:-.02em;font-weight:700}
+.sub{color:var(--muted);font-size:18px;margin:0 0 28px}
+.authors{font-size:16.5px;margin:0 0 6px}
+.authors a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--rule)}
+.authors .me{font-weight:700}
+.affil{color:var(--muted);font-size:14.5px;margin:6px 0 0}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:30px 0 4px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 17px;border-radius:999px;
+  background:var(--chip);color:var(--chipfg);text-decoration:none;font-size:14.5px;font-weight:500;
+  border:1px solid transparent;transition:.15s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+main{padding:8px 0 40px}
+section{padding:40px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;margin:0 0 18px}
+p{margin:0 0 16px}
+.abstract{font-size:17px;line-height:1.75}
+figure{margin:0}
+.ph{border:1px dashed var(--rule);border-radius:10px;padding:52px 24px;text-align:center;
+  color:var(--muted);font-size:14.5px;background:var(--chip)}
+figcaption{color:var(--muted);font-size:14px;margin-top:10px;text-align:center}
+pre{background:var(--code);border:1px solid var(--rule);border-radius:10px;padding:16px;
+  overflow-x:auto;font-size:13.5px;line-height:1.5}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+footer{padding:32px 0 60px;color:var(--muted);font-size:14px;text-align:center}
+footer a{color:var(--muted)}
+a{color:var(--accent)}
+@media(max-width:600px){header{padding:48px 0 32px}section{padding:32px 0}}
+</style>
+</head><body>
+<header><div class="wrap">
+  <div class="venue">WACV 2026</div>
+  <h1>WALDO</h1>
+  <p class="sub">Where Unseen Model-based 6D Pose Estimation Meets Occlusion</p>
+  <p class="authors"><span class="me">Sajjad Pakdamansavoji</span>, Yintao Ma, Amir Rasouli, Tongtong Cao</p>
+  <p class="affil"><!-- TODO: replace with real affiliations -->Affiliations to be added</p>
+  <div class="btns">
+    <a class="btn" href="https://arxiv.org/abs/2511.15874">Paper</a>
+    <a class="btn" href="https://arxiv.org/pdf/2511.15874">PDF</a>
+    <a class="btn" href="https://huggingface.co/papers/2511.15874">Hugging Face</a>
+    <a class="btn" href="https://github.com/SajjadPSavoji/WALDO">Code</a>
+    <a class="btn" href="#bibtex">BibTeX</a>
+  </div>
+</div></header>
+<main class="wrap">
+  <section>
+    <h2>Abstract</h2>
+    <p class="abstract">Accurate 6D object pose estimation is vital for robotics, augmented reality, and scene understanding. For seen objects, high accuracy is often attainable via per-object fine-tuning but generalizing to unseen objects remains a challenge. To address this problem, past arts assume access to CAD models at test time and typically follow a multi-stage pipeline to estimate poses: detect and segment the object, propose an initial pose, and then refine it. Under occlusion, however, the early-stage of such pipelines are prone to errors, which can propagate through the sequential processing, and consequently degrade the performance. To remedy this shortcoming, we propose four novel extensions to model-based 6D pose estimation methods: (i) a dynamic non-uniform dense sampling strategy that focuses computation on visible regions, reducing occlusion-induced errors; (ii) a multi-hypothesis inference mechanism that retains several confidence-ranked pose candidates, mitigating brittle single-path failures; (iii) iterative refinement to progressively improve pose accuracy; and (iv) series of occlusion-focused training augmentations that strengthen robustness and generalization. Furthermore, we propose a new weighted by visibility metric for evaluation under occlusion to minimize the bias in the existing protocols. Via extensive empirical evaluations, we show that our proposed approach achieves more than 5% improvement in accuracy on ICBIN and more than 2% on BOP dataset benchmarks, while achieving approximately 3 times faster inference.</p>
+  </section>
+  <section>
+    <h2>Method</h2>
+    <figure>
+      <div class="ph">Method figure &mdash; add <code>docs/static/method.png</code></div>
+      <figcaption>Overview of the approach.</figcaption>
+    </figure>
+  </section>
+  <section>
+    <h2>Results</h2>
+    <figure>
+      <div class="ph">Qualitative results &mdash; add <code>docs/static/results.png</code></div>
+      <figcaption>Qualitative comparison against baselines.</figcaption>
+    </figure>
+  </section>
+  <section id="bibtex">
+    <h2>BibTeX</h2>
+    <pre><code>@article{pakdamansavoji2025waldo,
+  title   = {WALDO: Where Unseen Model-based 6D Pose Estimation Meets Occlusion},
+  author  = {Sajjad Pakdamansavoji and Yintao Ma and Amir Rasouli and Tongtong Cao},
+  journal = {arXiv preprint arXiv:2511.15874},
+  year    = {2025}
+}</code></pre>
+  </section>
+</main>
+<footer class="wrap">
+  <p>Website template adapted for <a href="https://github.com/SajjadPSavoji/WALDO">WALDO</a>.
+  Page source in <code>docs/</code>.</p>
+</footer>
+</body></html>
