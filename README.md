@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 ## Results
 
-<img src="docs/static/results.png" width="100%">
+<img src="docs/static/result1.png" width="100%">
 
 - Improves accuracy by more than **5%** on IC-BIN and more than **2%** on BOP.
 - Achieves roughly **3× faster** inference than the comparable baseline.

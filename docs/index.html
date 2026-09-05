@@ -38,6 +38,17 @@ h1{font-size:clamp(28px,4.4vw,42px);line-height:1.18;margin:0 0 10px;letter-spac
 .authors .me{font-weight:700}
 .affil{color:var(--muted);font-size:14.5px;margin:6px 0 0}
 .notes{color:var(--muted);font-size:13px;margin:8px 0 0}
+figure.fig{margin:0 0 34px}
+figure.fig:last-child{margin-bottom:0}
+.tbl-wrap{overflow-x:auto;margin:0 0 10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:9px 14px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-weight:600;color:var(--muted);font-size:12.5px;letter-spacing:.05em;
+  text-transform:uppercase;border-bottom:1.5px solid var(--fg)}
+tbody tr:last-child td{border-bottom:1.5px solid var(--fg)}
+.tbl-title{font-weight:600;font-size:15px;margin:0 0 12px}
+.tbl-note{color:var(--muted);font-size:13.5px;margin:8px 0 30px}
 .tldr{background:var(--tldr);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
   padding:18px 22px;margin:0;font-size:17.5px;line-height:1.6}
 ul.pts{margin:0;padding-left:22px}
@@ -87,7 +98,8 @@ a{color:var(--accent)}
     <a class="btn" href="https://github.com/SajjadPSavoji/WALDO">Code</a>
     <a class="btn" href="#bibtex">BibTeX</a>
   </div>
-  <figure class="teaser"><img src="static/teaser.png" alt="WALDO teaser"></figure>
+  <figure class="teaser"><img src="static/teaser.png" alt="WALDO overview">
+    <figcaption>Unbiased average recall (UAR) versus inference time on BOP-Core*. WALDO sits at a better accuracy/speed trade-off than competing methods.</figcaption></figure>
 </div></header>
 <main class="wrap">
   <section>
@@ -103,19 +115,14 @@ a{color:var(--accent)}
     <ul class="pts"><li>Estimates occlusion probabilities while forming the initial pose hypothesis, then uses dynamic non-uniform dense sampling to prioritize visible regions during refinement.</li><li>Maintains multiple initial hypotheses, refines them iteratively, and selects the final pose by post-refinement confidence rather than committing early.</li><li>Training-time augmentations that simulate partial visibility: depth noise and dropout, mask corruption, and partial-view template rendering.</li><li>Occlusion-aware variants of standard 2D detection, segmentation, and 6D pose metrics, which remove the optimistic bias of benchmarks dominated by high-visibility instances.</li></ul>
   </section>
   <section>
-    <h2>Method</h2>
-    <figure>
-      <img src="static/method.png" alt="Method overview">
-      <figcaption>Overview of the proposed approach.</figcaption>
-    </figure>
+    <h2>Approach</h2>
+    <figure class="fig"><img src="static/approach1.png" alt="Overview of the 6D pose estimation framework. RGB–D observat"><figcaption>Overview of the 6D pose estimation framework. RGB–D observation and rendered template go to MUSE for boxes and masks; a coarse point-matching module produces multiple initial hypotheses and per-point occlusion probabilities, which guide dynamic non-uniform dense sampling and iterative refinement.</figcaption></figure><figure class="fig"><img src="static/approach2.png" alt="(Top) Estimated occlusion/background probabilities visualize"><figcaption>(Top) Estimated occlusion/background probabilities visualized by color (red = higher probability). Dense sampling concentrates on visible regions rather than sampling uniformly.</figcaption></figure>
   </section>
   <section>
     <h2>Results</h2>
-    <figure>
-      <img src="static/results.png" alt="Results">
-      <figcaption>Qualitative results and comparison against baselines.</figcaption>
-    </figure>
-    <ul class="pts res" style="margin-top:26px"><li>Improves accuracy by more than <strong>5%</strong> on IC-BIN and more than <strong>2%</strong> on BOP.</li><li>Achieves roughly <strong>3× faster</strong> inference than the comparable baseline.</li><li>Produces fewer false positives than SAM-6D in cluttered and heavily occluded scenes.</li></ul>
+    <ul class="pts res" style="margin-bottom:34px"><li>Improves accuracy by more than <strong>5%</strong> on IC-BIN and more than <strong>2%</strong> on BOP.</li><li>Achieves roughly <strong>3× faster</strong> inference than the comparable baseline.</li><li>Produces fewer false positives than SAM-6D in cluttered and heavily occluded scenes.</li></ul>
+    <p class="tbl-title">BOP-Core* — detection and segmentation</p><div class="tbl-wrap"><table><thead><tr><th>Model</th><th>AP</th><th>mAP<sub>D</sub></th><th>AR</th><th>mAR<sub>D</sub></th></tr></thead><tbody><tr><td>CNOS</td><td>0.425</td><td>0.169</td><td>0.519</td><td>0.374</td></tr><tr><td>Fast-SAM</td><td>0.456</td><td>0.216</td><td>0.528</td><td>0.384</td></tr><tr><td>NIDS</td><td>0.463</td><td>0.214</td><td>0.555</td><td>0.421</td></tr><tr><td>SAM-6D</td><td>0.491</td><td>0.202</td><td>0.576</td><td>0.433</td></tr><tr><td><b>WALDO (ours)</b></td><td><b>0.508</b></td><td><b>0.218</b></td><td><b>0.594</b></td><td><b>0.444</b></td></tr></tbody></table></div><p class="tbl-note">mAP<sub>D</sub> and mAR<sub>D</sub> are the proposed occlusion-aware metrics.</p><p class="tbl-title">6D pose — average recall / unbiased average recall, and runtime</p><div class="tbl-wrap"><table><thead><tr><th>Model</th><th>IC-BIN</th><th>BOP-Core*</th><th>Time (s)</th></tr></thead><tbody><tr><td>FRTPose</td><td>0.67 / 0.71</td><td>0.70 / 0.82</td><td>45.37</td></tr><tr><td>FoundationPose</td><td>0.42 / 0.50</td><td>0.57 / 0.74</td><td>29.32</td></tr><tr><td>FreeZe</td><td>0.64 / 0.69</td><td>0.66 / 0.82</td><td>24.89</td></tr><tr><td>Co-op</td><td>0.52 / 0.63</td><td>0.61 / 0.77</td><td>6.92</td></tr><tr><td>SAM-6D</td><td>0.50 / 0.58</td><td>0.54 / 0.71</td><td>4.37</td></tr><tr><td><b>WALDO (ours)</b></td><td><b>0.56 / 0.63</b></td><td><b>0.56 / 0.73</b></td><td><b>1.53</b></td></tr></tbody></table></div><p class="tbl-note">WALDO beats SAM-6D on accuracy while running roughly 2.9× faster.</p>
+    <figure class="fig"><img src="static/result1.png" alt="Qualitative comparison against SAM-6D on LM-O under occlusio"><figcaption>Qualitative comparison against SAM-6D on LM-O under occlusion. WALDO produces more reliable rotations.</figcaption></figure><figure class="fig"><img src="static/result2.png" alt="Qualitative comparison against SAM-6D on IC-BIN. WALDO consi"><figcaption>Qualitative comparison against SAM-6D on IC-BIN. WALDO consistently produces fewer false positives.</figcaption></figure><figure class="fig"><img src="static/result3.png" alt="Sensitivity of WALDO versus SAM-6D to the number of viewpoin"><figcaption>Sensitivity of WALDO versus SAM-6D to the number of viewpoints used at inference to build the object point cloud.</figcaption></figure><figure class="fig"><img src="static/result4.png" alt="Ratio of instances in BOP-Core split into ten deciles by vis"><figcaption>Ratio of instances in BOP-Core split into ten deciles by visibility fraction — the imbalance that motivates the occlusion-aware metrics.</figcaption></figure>
   </section>
   <section id="bibtex">
     <h2>BibTeX</h2>
