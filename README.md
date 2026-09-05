@@ -67,11 +67,11 @@ pip install -r requirements.txt
 If you find this work useful, please cite:
 
 ```bibtex
-@article{pakdamansavoji2025waldo,
-  title   = {WALDO: Where Unseen Model-based 6D Pose Estimation Meets Occlusion},
-  author  = {Sajjad Pakdamansavoji and Yintao Ma and Amir Rasouli and Tongtong Cao},
-  journal = {arXiv preprint arXiv:2511.15874},
-  year    = {2025}
+@inproceedings{pakdamansavoji2026waldo,
+  title     = {WALDO: Where Unseen Model-based 6D Pose Estimation Meets Occlusion},
+  author    = {Sajjad Pakdamansavoji and Yintao Ma and Amir Rasouli and Tongtong Cao},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year      = {2026}
 }
 ```
 
