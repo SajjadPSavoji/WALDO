@@ -7,12 +7,16 @@
 
 **Sajjad Pakdamansavoji**, Yintao Ma, Amir Rasouli, Tongtong Cao
 
+Huawei Technologies Canada
+
 [![Paper](https://img.shields.io/badge/arXiv-2511.15874-b31b1b.svg)](https://arxiv.org/abs/2511.15874)
 [![Project Page](https://img.shields.io/badge/Project-Page-1d4ed8.svg)](https://sajjadpsavoji.github.io/WALDO/)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97-Paper-yellow.svg)](https://huggingface.co/papers/2511.15874)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 </div>
+
+<img src="docs/static/teaser.png" width="100%">
 
 ---
 
@@ -41,7 +45,9 @@ pip install -r requirements.txt
 
 ## Results
 
-_Add a results table and qualitative figures here._
+<img src="docs/static/results.png" width="100%">
+
+_Add a quantitative results table here._
 
 ## Citation
 
@@ -66,7 +72,7 @@ If you find this work useful, please cite:
 
 ## Acknowledgements
 
-_Add funding, compute, and collaborator acknowledgements here._
+*Corresponding author
 
 ## License
 
