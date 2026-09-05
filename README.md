@@ -24,6 +24,17 @@ Huawei Technologies Canada
 > This repository is a placeholder. The paper and project page are live; **code release is in progress**.
 > Watch or star the repo to be notified when it lands.
 
+## Summary
+
+Makes the standard detect–segment–hypothesize–refine pose pipeline robust to occlusion by spending computation on the parts of an object that are actually visible.
+
+## Key Contributions
+
+- Estimates occlusion probabilities while forming the initial pose hypothesis, then uses dynamic non-uniform dense sampling to prioritize visible regions during refinement.
+- Maintains multiple initial hypotheses, refines them iteratively, and selects the final pose by post-refinement confidence rather than committing early.
+- Training-time augmentations that simulate partial visibility: depth noise and dropout, mask corruption, and partial-view template rendering.
+- Occlusion-aware variants of standard 2D detection, segmentation, and 6D pose metrics, which remove the optimistic bias of benchmarks dominated by high-visibility instances.
+
 ## Abstract
 
 Accurate 6D object pose estimation is vital for robotics, augmented reality, and scene understanding. For seen objects, high accuracy is often attainable via per-object fine-tuning but generalizing to unseen objects remains a challenge. To address this problem, past arts assume access to CAD models at test time and typically follow a multi-stage pipeline to estimate poses: detect and segment the object, propose an initial pose, and then refine it. Under occlusion, however, the early-stage of such pipelines are prone to errors, which can propagate through the sequential processing, and consequently degrade the performance. To remedy this shortcoming, we propose four novel extensions to model-based 6D pose estimation methods: (i) a dynamic non-uniform dense sampling strategy that focuses computation on visible regions, reducing occlusion-induced errors; (ii) a multi-hypothesis inference mechanism that retains several confidence-ranked pose candidates, mitigating brittle single-path failures; (iii) iterative refinement to progressively improve pose accuracy; and (iv) series of occlusion-focused training augmentations that strengthen robustness and generalization. Furthermore, we propose a new weighted by visibility metric for evaluation under occlusion to minimize the bias in the existing protocols. Via extensive empirical evaluations, we show that our proposed approach achieves more than 5% improvement in accuracy on ICBIN and more than 2% on BOP dataset benchmarks, while achieving approximately 3 times faster inference.
@@ -47,7 +58,9 @@ pip install -r requirements.txt
 
 <img src="docs/static/results.png" width="100%">
 
-_Add a quantitative results table here._
+- Improves accuracy by more than **5%** on IC-BIN and more than **2%** on BOP.
+- Achieves roughly **3× faster** inference than the comparable baseline.
+- Produces fewer false positives than SAM-6D in cluttered and heavily occluded scenes.
 
 ## Citation
 
